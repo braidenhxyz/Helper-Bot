@@ -1,0 +1,52 @@
+{
+	"name": "assistant",
+	"pretty_name": "Assistant Bot",
+	"version": "1.0.1",
+	"description": "Licensing bot for Discord.",
+	"main": "dist/index.js",
+	"scripts": {
+		"start": "node --enable-source-maps dist/index.js",
+		"clean": "rimraf -rf dist",
+		"dev": "pnpm clean && pnpm build && pnpm start",
+		"dev:watch": "nodemon src/index.ts",
+		"build": "tsc --build"
+	},
+	"keywords": [],
+	"author": "NorteX",
+	"license": "ISC",
+	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+		"@types/js-yaml": "^4.0.5",
+		"@types/ms": "^0.7.34",
+		"@types/node": "^20.10.1",
+		"discord-api-types": "^0.37.65",
+		"nodemon": "^3.0.1",
+		"prettier": "^3.1.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.3.2"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.8.2",
+		"@nortex/pretty-zod-error": "^2.0.0",
+		"@types/node-fetch": "^2.6.11",
+		"@vitalets/google-translate-api": "^9.2.0",
+		"ansi-colors": "^4.1.3",
+		"better-sqlite3": "^9.4.3",
+		"dayjs": "^1.11.10",
+		"discord.js": "^14.15.3",
+		"dotenv": "^16.4.5",
+		"express": "^4.18.3",
+		"hono": "^4.1.0",
+		"js-yaml": "^4.1.0",
+		"ms": "^2.1.3",
+		"nanoid": "3.3.4",
+		"nhandler": "^4.2.0",
+		"openai": "^4.47.2",
+		"pg": "^8.11.5",
+		"reflect-metadata": "^0.2.2",
+		"rimraf": "^5.0.7",
+		"sqlite3": "^5.1.7",
+		"typeorm": "^0.3.20",
+		"zod": "^3.22.4"
+	}
+}
