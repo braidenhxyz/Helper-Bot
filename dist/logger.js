@@ -10,7 +10,7 @@ const util_1 = require("util");
 const ansi_colors_1 = __importDefault(require("ansi-colors"));
 let logFileName = `log-${new Date().toISOString().replace(/:/g, "-")}.txt`;
 const welcomeLog = (name, version) => {
-    console.log(ansi_colors_1.default.green(`┌ Helper Bot • Author: Braiden H • Version: 2.4.1`));
+    console.log(ansi_colors_1.default.green(`┌ Helper Bot • Author: Braiden H • Version: 2.4.3`));
     (0, exports.writeLogToFile)(`--- Log start at ${new Date().toISOString()} ---\n`);
 };
 exports.welcomeLog = welcomeLog;
