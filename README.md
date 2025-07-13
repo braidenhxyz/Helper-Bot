@@ -9,4 +9,4 @@ For full setup instructions, usage guides, and command references, please visit 
 
 👉 [Helper Bot Documentation](https://docs.braidenh.com/Helper)
 
-> **Note:** This project is provided as-is. No official support or assistance is offered.
+> **Note:** This project is delivered without any guarantees. No official support or help is available. Basic commands and fixes will be updated periodically.
