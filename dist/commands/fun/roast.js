@@ -24,11 +24,21 @@ class default_1 extends util_1.BaseCommand {
         const targetUser = interaction.options.getUser("user");
         
         const roasts = [
-            "You're like a cloud. When you disappear, it's a beautiful day! ☁️☀️",
-            "You bring everyone so much joy… when you leave the room! 😆",
-            "You're proof that even evolution takes a step back sometimes. 🦧",
-            "You have something on your chin… no, the third one down. 😂",
-            "I'd agree with you but then we’d both be wrong. 🤷‍♂️"
+            "You're not dumb — you're just... chronically under-updated.",
+            "If I had a dollar for every smart thing you've said, I’d still be broke.",
+            "You bring the same energy as a printer with low ink — loud, slow, and full of errors.",
+            "Your confidence is impressive for someone who gets lost in their own browser tabs.",
+            "You're the human version of a software beta — always crashing at the worst time.",
+            "You have potential — it's just hiding really, really well.",
+            "You're not completely useless. You can always serve as a bad example.",
+            "You have something AI will never match: consistently poor decision-making.",
+            "Your talent is like a hidden file — very well hidden.",
+            "You're the reason the 'Are you sure?' button exists.",
+            "You're like a slow-loading webpage — everyone gives up halfway through.",
+            "If common sense were RAM, you'd be out of memory errors constantly.",
+            "You're the plot twist nobody asked for in a story that was fine without it.",
+            "You talk like your ideas are still buffering.",
+            "You're a walking typo in the script of life."
         ];
         
         const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
