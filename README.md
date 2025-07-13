@@ -1,10 +1,12 @@
 # Helper Bot
 
-Helper Bot is a portable Discord bot designed to be added directly to your Discord user account, giving you access to its features across any servers or DMs you’re in, without needing to add it to each individual server like a traditional bot.
+**Helper Bot** is a lightweight, portable Discord assistant built to integrate directly with your user account.  
+Unlike traditional bots that must be invited to each server, Helper Bot follows *you* — giving you seamless access to its tools and features across all your servers and DMs automatically.
 
-## Documention
-Feel free to check out the Documentation below. 
+## 📚 Documentation
 
-Everything is as-is and no support will be given
+For full setup instructions, usage guides, and command references, please visit the official documentation site:
 
-https://docs.braidenh.com/Helper
+👉 [Helper Bot Documentation](https://docs.braidenh.com/Helper)
+
+> **Note:** This project is provided as-is. No official support or assistance is offered.
