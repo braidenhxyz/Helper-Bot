@@ -6,7 +6,7 @@ const { BaseCommand } = require("../../util");
 class default_1 extends BaseCommand {
     name = "coinflip";
     description = "Flip a coin!";
-    metadata = { category: "Fun" };
+    metadata = { category: "fun" };
     integrationTypes = [0, 1];
     contexts = [0, 1, 2];
 
