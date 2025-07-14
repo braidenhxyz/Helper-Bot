@@ -6,7 +6,7 @@ const { BaseCommand } = require("../../util");
 class default_1 extends BaseCommand {
     name = "roll";
     description = "Roll a dice between 1 and 100.";
-    metadata = { category: "Fun" };
+    metadata = { category: "fun" };
     integrationTypes = [0, 1];
     contexts = [0, 1, 2];
 
