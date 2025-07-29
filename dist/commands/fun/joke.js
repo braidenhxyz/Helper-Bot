@@ -22,7 +22,7 @@ class default_1 extends BaseCommand {
             const data = await response.json();
             return data.joke;
         } catch (error) {
-            console.error('Failed to fetch insult from API:', error);
+            console.error('Failed to fetch joke from API:', error);
             throw new Error('API request failed');
         }
     }
