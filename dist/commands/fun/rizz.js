@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const util_1 = require("../../util");
+const fs = require("fs");
+const path = require("path");
 
 class default_1 extends util_1.BaseCommand {
     name = "rizz";
@@ -19,23 +21,26 @@ class default_1 extends util_1.BaseCommand {
         },
     ];
 
-    pickupLines = [
-        "Are you a magician? Because whenever I look at you, everyone else disappears.",
-        "Do you have a name, or can I call you mine?",
-        "Are you French? Because Eiffel for you.",
-        "If beauty were a crime, you’d definitely be serving life.",
-        "Are you Wi‑Fi? Because I’m feeling a strong connection.",
-        "Do you have a map? Because I just got lost in your eyes.",
-        "You must be a campfire, because you're hot and I want s'more.",
-        "Even my GPU doesn’t render something this stunning.",
-        "Are you made of copper and tellurium? Because you’re Cu‑Te.",
-        "Are you a keyboard? Because you're just my type.",
-        "You're so sweet, you could put Hershey’s out of business.",
-        "You must be a time traveler — because I see you in my future.",
-        "Is your name Google? Because you have everything I’ve been searching for.",
-        "Are we in a server together? Because I feel a special connection here.",
-        "If we were both strings, I’d be tied to you forever."
-    ];
+    loadPickupLines() {
+        try {
+            const presetPath = path.join(__dirname, "../../presets/rizz.txt");
+            const content = fs.readFileSync(presetPath, "utf-8");
+            return content.trim().split('\n').filter(line => line.trim() !== '');
+        } catch (error) {
+            console.error("Failed to load pickup lines from preset file:", error);
+            // Fallback to default pickup lines if file can't be read
+            return [
+                "Are you a magician? Because whenever I look at you, everyone else disappears.",
+                "Do you have a name, or can I call you mine?",
+                "Are you Wi‑Fi? Because I'm feeling a strong connection."
+            ];
+        }
+    }
+
+    async run(interaction) {
+        const targetUser = interaction.options.getUser("user", true);
+        const pickupLines = this.loadPickupLines();
+        const line = pickupLines[Math.floor(Math.random() * pickupLines.length)];
 
     async run(interaction) {
         const targetUser = interaction.options.getUser("user", true);
