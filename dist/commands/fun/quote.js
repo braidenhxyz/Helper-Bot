@@ -3,33 +3,46 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { EmbedBuilder } = require("discord.js");
 const { BaseCommand } = require("../../util");
 
+// ZenQuotes (keyless)
+async function getFromZenQuotes() {
+  const res = await fetch("https://zenquotes.io/api/random");
+  if (!res.ok) throw new Error(`ZenQuotes failed: ${res.status}`);
+  const data = await res.json(); // [{ q, a, h }]
+  if (!Array.isArray(data) || data.length === 0) throw new Error("ZenQuotes returned empty");
+  const { q, a } = data[0] || {};
+  if (!q) throw new Error("ZenQuotes missing quote text");
+  return { content: q, author: a || "Unknown" };
+}
+
 class default_1 extends BaseCommand {
-    name = "quote";
-    description = "Get a random inspirational or funny quote.";
-    metadata = { category: "fun" };
-    integrationTypes = [0, 1];
-    contexts = [0, 1, 2];
+  name = "quote";
+  description = "Get a random quote (ZenQuotes).";
+  metadata = { category: "fun" };
+  integrationTypes = [0, 1];
+  contexts = [0, 1, 2];
 
-    quotes = [
-        "“The best way to predict the future is to invent it.” – Alan Kay",
-        "“I'm not great at the advice. Can I interest you in a sarcastic comment?” – Chandler Bing",
-        "“Do or do not. There is no try.” – Yoda",
-        "“Life is what happens when you're busy making other plans.” – John Lennon",
-        "“Talk is cheap. Show me the code.” – Linus Torvalds",
-        "“I'm not arguing, I'm just explaining why I'm right.”",
-        "“Reality is broken. Game designers can fix it.” – Jane McGonigal"
-    ];
+  async run(interaction) {
+    try {
+      const q = await getFromZenQuotes();
 
-    async run(interaction) {
-        const quote = this.quotes[Math.floor(Math.random() * this.quotes.length)];
+      const embed = new EmbedBuilder()
+        .setTitle("💬 Quote")
+        .setDescription(`*${q.content}*\n— **${q.author}**`)
+        .setColor(0x8b0000)
+        .setTimestamp()
+        .setFooter({ text: `Requested by ${interaction.user.username}` });
 
-        const embed = new EmbedBuilder()
-            .setTitle("📜 Quote of the Moment")
-            .setDescription(quote)
-            .setColor(0x87CEEB)
-            .setTimestamp();
+      await interaction.reply({ embeds: [embed] });
+    } catch (err) {
+      const embed = new EmbedBuilder()
+        .setTitle("💬 Quote")
+        .setDescription("Couldn’t fetch a quote from ZenQuotes right now. Please try again later.")
+        .setColor(0x8b0000)
+        .setTimestamp()
+        .setFooter({ text: `Requested by ${interaction.user.username}` });
 
-        await interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed], ephemeral: true });
     }
+  }
 }
 exports.default = default_1;
