@@ -1,49 +1,64 @@
-// ── /insult ────────────────────────────────────────────────────────────────────
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
 const { BaseCommand } = require("../../util");
 
 class default_1 extends BaseCommand {
-    name = "insult";
-    description = "Deliver a savage insult to a user.";
-    metadata = { category: "fun" };
-    integrationTypes = [0, 1];
-    contexts = [0, 1, 2];
+  name = "insult";
+  description = "Playfully insult someone (opt-in).";
+  metadata = { category: "fun" };
+  integrationTypes = [0, 1];
+  contexts = [0, 1, 2];
 
-    options = [
-        {
-            type: ApplicationCommandOptionType.User,
-            name: "user",
-            description: "The unlucky target.",
-            required: true,
-        },
-    ];
+  // Optional inputs: a target user and whether to reply ephemerally
+  options = [
+    {
+      name: "target",
+      description: "Who should receive the insult?",
+      type: ApplicationCommandOptionType.User,
+      required: false,
+    },
+    {
+      name: "ephemeral",
+      description: "Only you can see the response",
+      type: ApplicationCommandOptionType.Boolean,
+      required: false,
+    },
+  ];
 
-    insults = [
-        "I'd call you sharp, but even a bowling ball has better edges.",
-        "Your ideas are like software updates—announced loudly, forgotten quickly.",
-        "You have the charisma of unsalted oatmeal.",
-        "If ignorance were currency, you'd have Jeff Bezos sweating.",
-        "I've met JSON files with more structure than your arguments.",
-        "You're the human equivalent of a 404 error: here, but nothing loads.",
-        "Your potential is like a comment marked TODO—permanently pending.",
-        "You add as much value as a semicolon in Python.",
-        "I'd explain it slowly, but your bandwidth is already saturated.",
-        "Evolution is working overtime to patch your bugs."
-    ];
-
-    async run(interaction) {
-        const user = interaction.options.getUser("user", true);
-        const burn = this.insults[Math.floor(Math.random() * this.insults.length)];
-
-        const embed = new EmbedBuilder()
-            .setTitle("🗯️ Brutal Insult")
-            .setDescription(`**${user.username}**, ${burn}`)
-            .setColor(0x8B0000)
-            .setTimestamp();
-
-        await interaction.reply({ embeds: [embed] });
+  async fetchInsult() {
+    try {
+      const res = await fetch(
+        "https://evilinsult.com/generate_insult.php?lang=en&type=json",
+        { headers: { Accept: "application/json" } }
+      );
+      if (!res.ok) throw new Error(`API request failed: ${res.status}`);
+      const data = await res.json();
+      return (data && data.insult) || null;
+    } catch (err) {
+      console.error("Failed to fetch insult from API:", err);
+      return null; // fall back in run()
     }
+  }
+
+  async run(interaction) {
+    const target = interaction.options.getUser("target");
+    const ephemeral = interaction.options.getBoolean("ephemeral") ?? false;
+
+    const insult =
+      (await this.fetchInsult()) ??
+      "I couldn’t think of a witty jab right now 🙃";
+
+    const description = target ? `<@${target.id}>, ${insult}` : insult;
+
+    const embed = new EmbedBuilder()
+      .setTitle("🗯️ Insult")
+      .setDescription(description)
+      .setColor(0x8b0000)
+      .setTimestamp()
+      .setFooter({ text: `Requested by ${interaction.user.username}` });
+
+    await interaction.reply({ embeds: [embed], ephemeral });
+  }
 }
 exports.default = default_1;
