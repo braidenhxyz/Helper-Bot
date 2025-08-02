@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { BaseCommand } = require("../../util");
 
 class default_1 extends BaseCommand {
