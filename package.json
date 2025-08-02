@@ -1,8 +1,8 @@
 {
-	"name": "assistant",
-	"pretty_name": "Assistant Bot",
+	"name": "Helper-Bot",
+	"pretty_name": "Helper Bot",
 	"version": "1.0.1",
-	"description": "Licensing bot for Discord.",
+	"description": "Helping bot for Discord.",
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "node --enable-source-maps dist/index.js",
@@ -12,7 +12,7 @@
 		"build": "tsc --build"
 	},
 	"keywords": [],
-	"author": "NorteX",
+	"author": "Team984.net Development - Braiden H",
 	"license": "ISC",
 	"devDependencies": {
 		"@ianvs/prettier-plugin-sort-imports": "^4.1.1",
