@@ -1,6 +1,9 @@
 # The bot token
 token: "DISCORD_BOT_TOKEN_HERE"
 
+# Google AI API Key
+googleAiApiKey: "YOUR_GOOGLE_AI_API_KEY_HERE"
+
 # Discord IDs of people permitted to use the bot
 permittedIds:
   - "YOUR_ID_HERE"
